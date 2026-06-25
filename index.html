@@ -3,87 +3,183 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sonic</title>
+<title>SONIC</title>
 
 <style>
 body{
-    font-family: Arial, sans-serif;
-    background:#f4f8ff;
-    text-align:center;
-    padding:20px;
-}
-
-.container{
-    max-width:500px;
-    margin:auto;
-    background:white;
-    padding:20px;
-    border-radius:15px;
-    box-shadow:0 0 10px rgba(0,0,0,0.1);
+font-family:Arial,sans-serif;
+background:#f5f9ff;
+margin:0;
+padding:20px;
 }
 
 h1{
-    color:#0066ff;
+text-align:center;
+color:#0066ff;
 }
 
-input, textarea{
-    width:90%;
-    padding:12px;
-    margin:8px;
-    border:1px solid #ccc;
-    border-radius:8px;
+.categories{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:15px;
+max-width:700px;
+margin:auto;
 }
 
-button{
-    background:#0066ff;
-    color:white;
-    border:none;
-    padding:12px 25px;
-    border-radius:8px;
-    cursor:pointer;
-    font-size:16px;
+.card{
+background:white;
+padding:20px;
+border-radius:15px;
+text-align:center;
+font-size:20px;
+font-weight:bold;
+cursor:pointer;
+box-shadow:0 0 10px rgba(0,0,0,.1);
+}
+
+.hidden{
+display:none;
+}
+
+.store{
+background:white;
+padding:15px;
+margin:10px auto;
+max-width:600px;
+border-radius:12px;
+box-shadow:0 0 10px rgba(0,0,0,.1);
+}
+
+.store button{
+background:#0066ff;
+color:white;
+border:none;
+padding:10px 20px;
+border-radius:10px;
+cursor:pointer;
+}
+
+.back{
+margin:20px;
+background:#0066ff;
+color:white;
+border:none;
+padding:10px 20px;
+border-radius:10px;
+cursor:pointer;
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
-    <h1>🚀 Sonic</h1>
-    <p>خدمة توصيل سريعة</p>
+<h1>🚀 SONIC</h1>
 
-    <input type="text" id="name" placeholder="الاسم">
-    <input type="text" id="phone" placeholder="رقم الهاتف">
-    <input type="text" id="address" placeholder="العنوان">
-    <textarea id="order" placeholder="اكتب طلبك"></textarea>
+<div id="home">
 
-    <button onclick="sendOrder()">إرسال الطلب</button>
+<div class="categories">
+
+<div class="card" onclick="showCategory('restaurants')">🍔 مطاعم</div>
+
+<div class="card" onclick="showCategory('pharmacy')">💊 صيدليات</div>
+
+<div class="card" onclick="showCategory('market')">🛒 ماركت</div>
+
+<div class="card" onclick="showCategory('hardware')">🔩 حدايد وبويات</div>
+
+</div>
+
+</div>
+
+<div id="restaurants" class="hidden">
+<button class="back" onclick="goHome()">رجوع</button>
+
+<div class="store">
+<h3>مطعم الشيف</h3>
+<p>01011111111</p>
+<button onclick="order('مطعم الشيف')">اطلب الآن</button>
+</div>
+
+<div class="store">
+<h3>بيتزا هاوس</h3>
+<p>01022222222</p>
+<button onclick="order('بيتزا هاوس')">اطلب الآن</button>
+</div>
+</div>
+
+<div id="pharmacy" class="hidden">
+<button class="back" onclick="goHome()">رجوع</button>
+
+<div class="store">
+<h3>صيدلية الحياة</h3>
+<p>01033333333</p>
+<button onclick="order('صيدلية الحياة')">اطلب الآن</button>
+</div>
+</div>
+
+<div id="market" class="hidden">
+<button class="back" onclick="goHome()">رجوع</button>
+
+<div class="store">
+<h3>ماركت المدينة</h3>
+<p>01044444444</p>
+<button onclick="order('ماركت المدينة')">اطلب الآن</button>
+</div>
+</div>
+
+<div id="hardware" class="hidden">
+<button class="back" onclick="goHome()">رجوع</button>
+
+<div class="store">
+<h3>النجار للحدايد والبويات</h3>
+<p>01055555555</p>
+<button onclick="order('النجار للحدايد والبويات')">اطلب الآن</button>
+</div>
 </div>
 
 <script>
-function sendOrder(){
 
-let name = document.getElementById("name").value;
-let phone = document.getElementById("phone").value;
-let address = document.getElementById("address").value;
-let order = document.getElementById("order").value;
+function showCategory(cat){
+document.getElementById("home").style.display="none";
 
-let message =
-`طلب جديد من Sonic
+document.querySelectorAll(".hidden").forEach(x=>{
+x.style.display="none";
+});
 
-الاسم: ${name}
-الهاتف: ${phone}
-العنوان: ${address}
+document.getElementById(cat).style.display="block";
+}
+
+function goHome(){
+document.querySelectorAll(".hidden").forEach(x=>{
+x.style.display="none";
+});
+
+document.getElementById("home").style.display="block";
+}
+
+function order(store){
+
+let address=prompt("اكتب عنوانك");
+let details=prompt("اكتب طلبك");
+
+let msg=
+`طلب جديد
+
+المحل: ${store}
+
+العنوان:
+${address}
 
 الطلب:
-${order}`;
+${details}`;
 
 window.open(
-`https://wa.me/201055924131?text=${encodeURIComponent(message)}`,
+`https://wa.me/201036455304?text=${encodeURIComponent(msg)}`,
 '_blank'
 );
 
 }
+
 </script>
 
 </body>
